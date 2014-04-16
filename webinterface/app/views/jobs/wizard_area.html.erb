@@ -1,5 +1,9 @@
 <link type="text/css" rel="stylesheet" href="<%= asset_path 'leaflet-0.7.2/leaflet.css' %>"></script>
 <script type="text/javascript" src="<%= asset_path 'leaflet-0.7.2/leaflet.js' %>"></script>
+
+<link type="text/css" rel="stylesheet" href="<%= asset_path 'leaflet-draw-0.2.4/leaflet.draw.css' %>"></script>
+<script type="text/javascript" src="<%= asset_path 'leaflet-draw-0.2.4/leaflet.draw.js' %>"></script>
+
 <script type="text/javascript">
 $(document).ready(function() {
 
@@ -11,7 +15,6 @@ $(document).ready(function() {
 
    var vectors;
    var box;
-   var transform;
 
    var mapMessage = "";
 
@@ -116,35 +119,28 @@ function init_map(){
 
 function init_drawfeature() {
 
+
    if (vectors) {
-      map.removeLayer(vectors);
-      vectors=null;
+     vectors.clearLayers();
    }
-/*
-   vectors = new OpenLayers.Layer.Vector("Box", {
-      displayInLayerSwitcher: false
-   });
-   map.addLayers([vectors]);
+   else{
+     vectors = new L.FeatureGroup();
+     map.addLayer(vectors);
+   }
 
-   box = new OpenLayers.Control.DrawFeature(vectors, OpenLayers.Handler.RegularPolygon, {
-      handlerOptions: {
-         sides: 4,
-         snapAngle: 90,
-         irregular: true,
-         persist: true
-      }
+   box = new L.Control.Draw({
+     draw: {
+       polyline: false,
+       polygon: false,
+       circle: false,
+       marker: false
+     },
+     edit: {
+       featureGroup: vectors
+     }
    });
-   box.handler.callbacks.done = draw_end;
    map.addControl(box);
-
-   transform = new OpenLayers.Control.TransformFeature(vectors, {
-      rotate: false,
-      irregular: true
-   });
-   transform.events.register("transformcomplete", transform, transformComplete);
-   map.addControl(transform);
-*/
-
+   map.on('draw:created', draw_end);
 }
 
 function start_drawfeature() {
@@ -158,18 +154,15 @@ function transformComplete(event) {
 }
 
 function draw_end(bbox) {
-   bounds = bbox.getBounds();
+   bounds = bbox.layer; //bbox.getBounds();
    draw_box(bounds);
-   set_bounds(bounds);
-   box.deactivate();
+   set_bounds(bounds.getBounds());
+   //box.deactivate();
    $("p#select_area").css({"visibility":"visible"});
 }
 
 function draw_box(bounds) {
-   vectors.removeAllFeatures();
-   //var feature = new OpenLayers.Feature.Vector(bounds.toGeometry());
-   //vectors.addFeatures(feature);
-   //transform.setFeature(feature);
+  vectors.addLayer(bounds);
 }
 
 
@@ -216,8 +209,8 @@ function values2box() {
    xmaxlon = $("#job_lonmax").val();
    xmaxlat = $("#job_latmax").val();
 
-   bounds = new OpenLayers.Bounds(xminlon, xminlat, xmaxlon, xmaxlat);
-   bounds.transform(proj4326,projmerc);
+   //bounds = new OpenLayers.Bounds(xminlon, xminlat, xmaxlon, xmaxlat);
+   //bounds.transform(proj4326,projmerc);
    draw_box(bounds);
    $("form").resetClientSideValidations();
 }
@@ -290,23 +283,37 @@ $("form#new_job").submit(function() {
       <%= f.text_area :description, :style => "width: 500px;" %>
     </div>
     <div>
-      <%= f.label :description, t('jobs.th.area') %>
-      <br/>
+      <%= f.label :preset, t('jobs.th.preset') %>
+      <select>
+        <option>presets</option>
+      </select>
+    </div>
+    <div>
+      <%= f.label :preset, t('jobs.th.translate') %>
+      <select>
+        <option>translations</option>
+      </select>
+    </div>
+    <div>
+      <%= f.label :preset, t('jobs.th.transform') %>
+      <select>
+        <option>tag transforms</option>
+      </select>
+    </div>
+    <div>
       <div id="mapmessage">&nsbp;</div>
-      <p id="select_area">
-        <img src="/assets/Pointer.png" style="width:20px;" class="select_area"/>
-        <a href="#" class="select_area">
-          <%= t 'jobs.action.select_area' %>
-        </a>
-      </p>
+      <img src="/assets/Pointer.png" style="width:20px;" class="select_area"/>
+      <a href="#" class="select_area">
+        <%= t 'jobs.action.select_area' %>
+      </a>
 
       <%= f.hidden_field(:lonmin) %>
       <%= f.hidden_field(:latmin) %>
       <%= f.hidden_field(:lonmax) %>
       <%= f.hidden_field(:latmax) %>
-
+   </div>
+   <div style="text-align:center;">
       <%= f.submit t('jobs.button.createjob'), :class=>'submit' %>
-
    </div>
 
    <% end %>

@@ -2,8 +2,7 @@
    <pre style="margin-top: 20px;"><%= @e.message %></pre>
 <% end %>
 
-<div class="container">
-  <h1><%= t 'jobs.newjobconf.h1' %></h1>
+<h1><%= t 'jobs.newjobconf.h1' %></h1>
 
 <div class="wizard">
 <%= form_tag({:action => :wizard_configuration_create}, :multipart => true) do %>
