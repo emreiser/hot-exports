@@ -31,8 +31,7 @@ $(document).ready(function() {
    $(".latlon").change(function() {
       init_drawfeature();
       values2box();
-//box.deactivate();
-//transform.deactivate();
+      map.removeControl(box);
    });
 
 
@@ -73,7 +72,7 @@ function init_map(){
      new L.LatLng(<%= @job.latmin %>, <%= @job.lonmin %>),
      new L.LatLng(<%= @job.lonmax %>, <%= @job.latmax %>)
    );
-   //map.zoomToExtent(extent.scale(2))
+   map.fitBounds(extent.pad(0.5))
 <% end %>
 
 
@@ -102,12 +101,11 @@ function init_drawfeature() {
        featureGroup: vectors
      }
    });
-   map.addControl(box);
    map.on('draw:created', draw_end);
 }
 
 function start_drawfeature() {
-   //box.activate();
+   map.addControl(box);
    updateMapMessage('<%=t('jobs.area.drag_to_select')%>');
    $("p#select_area").css({"visibility":"hidden"});
 }
@@ -117,10 +115,10 @@ function transformComplete(event) {
 }
 
 function draw_end(bbox) {
-   bounds = bbox.layer; //bbox.getBounds();
+   bounds = bbox.layer;
    draw_box(bounds);
    set_bounds(bounds.getBounds());
-   //box.deactivate();
+   map.removeControl(box);
    $("p#select_area").css({"visibility":"visible"});
 }
 
@@ -136,12 +134,12 @@ function set_bounds(bounds) {
       return false;
    }
 
-   z = 10000;
+   z = 4;
 
-   var left    = Math.round(bounds.left   * z) / z;
-   var bottom  = Math.round(bounds.bottom * z) / z;
-   var right   = Math.round(bounds.right  * z) / z;
-   var top     = Math.round(bounds.top    * z) / z;
+   var left    = bounds.getSouthWest().lng.toFixed(4);
+   var bottom  = bounds.getSouthWest().lat.toFixed(4);
+   var right   = bounds.getNorthEast().lng.toFixed(4);
+   var top     = bounds.getNorthEast().lat.toFixed(4);
 
    $("#job_lonmin").val(left);
    $("#job_latmin").val(bottom);
@@ -183,11 +181,11 @@ function values2box() {
 
 function check_bounds(bounds) {
 
-   var poly = bounds.toGeometry();
-   //var covered_region = check_layer.features[0].geometry.intersects(poly);
+   var covered_region = {}; //check_layer.features[0].geometry.intersects(poly);
 
-   var max_bounds_area = <%= @max_bounds_area.to_s %>;
-   var area = bounds.getArea();
+   var max_bounds_area = <%= @max_bounds_area.to_s %> / 1000;
+   var area = (bounds.getNorthEast().lat - bounds.getSouthWest().lat)
+      * (bounds.getNorthEast().lng - bounds.getSouthWest().lng);
 
    $("a.select_area").text('<%=t('jobs.area.select_different') %>');
 
@@ -250,21 +248,21 @@ $("form#new_job").submit(function() {
     </div>
     <div>
       <%= f.label :preset, t('jobs.th.preset') %>
-      <select>
-        <option>presets</option>
-      </select>
+      <%= select_tag('uploads[presetfile]', options_for_select(@upfiles['preset'], :selected => 0)) %>
     </div>
     <div>
       <%= f.label :preset, t('jobs.th.translate') %>
-      <select>
-        <option>translations</option>
-      </select>
+      <%= select_tag('uploads[translation]', options_for_select(@upfiles['translation'], :selected => 0)) %>
     </div>
     <div>
       <%= f.label :preset, t('jobs.th.transform') %>
-      <select>
-        <option>tag transforms</option>
-      </select>
+      <ul>
+      <% @upfiles['tagtransform'].each do |k, v| %>
+         <% if v != 0 %>
+            <li><%= check_box_tag('uploads[tagtransform][]', v) %><%= label_tag(v, k) %></li>
+         <% end %>
+      <% end %>
+      </ul>
     </div>
     <div>
       <div id="mapmessage">&nsbp;</div>

@@ -3,12 +3,12 @@ class JobsController < ApplicationController
    before_filter :authenticate_user!, :except => [:index, :show, :reload_runs, :newrun]
 
    require 'xml/libxml'
-   
+
    def index
       @title = t('jobs.title')
 
       # Parameter
-      # show deleted:   deleted = y 
+      # show deleted:   deleted = y
       # hide deleted:   no parameter or deleted = n
 
       if user_signed_in? then
@@ -44,7 +44,7 @@ class JobsController < ApplicationController
          end
       end
    end
-   
+
    def show
       @job = Job.find(params[:id])
       @runs = Run.where("job_id = ?", params[:id])
@@ -59,7 +59,7 @@ class JobsController < ApplicationController
       @runs = Run.where("job_id = ?", params[:job_id])
 
       respond_to do |format|
-         
+
          if (current_user.try(:admin?))
             format.json {render :json => @runs, :include => [:user, :downloads] }
          else
@@ -73,7 +73,8 @@ class JobsController < ApplicationController
       @title   = t('jobs.newjob.title')
       @h1      = t('jobs.newjob.h1')
       @action  = 'wizard_configuration'
-      
+      @upfiles = uploadfiles_prepare
+
       @max_bounds_area = 100
       @max_bounds_area = 200 if current_user.admin
    end
@@ -86,13 +87,13 @@ class JobsController < ApplicationController
          @job         = Job.find(params[:job_id])
          @job.user_id = current_user.id
 
-         @title   =  t('jobs.newjobwithconf.title') 
+         @title   =  t('jobs.newjobwithconf.title')
          @h1      =  t('jobs.newjobwithconf.h1')
          @action  = 'newwithconfiguration_create'
 
          @max_bounds_area = 100
          @max_bounds_area = 200 if current_user.admin
-      
+
          render :wizard_area
       end
    end
@@ -100,7 +101,6 @@ class JobsController < ApplicationController
    def wizard_configuration
       @job = Job.new(params[:job])
 
-      @upfiles = uploadfiles_prepare
       @title = t('jobs.newjobconf.title')
       render 'wizard_configuration_form'
    end
@@ -116,12 +116,12 @@ class JobsController < ApplicationController
       else
          tags = Hash.new
       end
-     
+
       error = 0
       Job.transaction do
          if @job.save then
             #puts @job.inspect
-         else 
+         else
             error = 1
          end
 
@@ -165,7 +165,7 @@ class JobsController < ApplicationController
 
       end
 
-      if tags.count == 0 
+      if tags.count == 0
          error = 111
       end
 
@@ -185,7 +185,7 @@ class JobsController < ApplicationController
          @title = t('jobs.newjobconf.h1')
          render 'wizard_configuration_form'
 
-      else 
+      else
          @title = t('jobs.newjob.title')
          flash[:error] = t('jobs.flash.error.not_saved')
          render 'wizard_area'
@@ -203,7 +203,7 @@ class JobsController < ApplicationController
 
       Job.transaction do
          if @job.save then
-         else 
+         else
             error = 1
          end
 
@@ -222,7 +222,7 @@ class JobsController < ApplicationController
       if error == 0 then
          flash[:success] = t('jobs.flash.success.job_created')
          redirect_to @job
-      else 
+      else
          @title = "New Job"
          flash[:error] = t('jobs.flash.error.not_saved')
          render 'wizard_area'
@@ -235,8 +235,8 @@ class JobsController < ApplicationController
       @run = Run.new
       @run.job_id = params[:job_id]
       @run.state = 'new'
-     
-      # user_id if user logged in 
+
+      # user_id if user logged in
       unless (current_user.nil?)
          @run.user_id = try(:current_user).id
       end
@@ -247,15 +247,15 @@ class JobsController < ApplicationController
       # else save
       elsif @run.save
          flash[:success] = t('jobs.flash.success.run_started')
-      else 
+      else
          flash[:error] = t('jobs.flash.error.no_run_started')
       end
 
       @title = @job.name
       redirect_to @job
    end
-  
-  
+
+
    def invisible
       change_visibility(params[:id], false, params['deleted'])
    end
@@ -310,7 +310,7 @@ private
    def up_prepare(uptype)
       upf = Upload.where("visibility=true and uptype=?", uptype)
       upfiles = Hash.new
-      upfiles[t('jobs.newjobconf.no_file')] = 0      
+      upfiles[t('jobs.newjobconf.no_file')] = 0
 
       upf.each do |up|
          upfiles[up.name] = up.id
