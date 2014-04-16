@@ -1,12 +1,12 @@
 /* set all distances to zero */
 body, div, span, h1, h2, h3, h4, h5, h6, ol, ul, li, fieldset, legend, p, i, b, em, pre, code, img {
    padding: 0px;
-   margin: 0px;   
+   margin: 0px;
    border: 0px;
 }
 table, thead, tbody, tr, th, td {
    padding: 0px;
-   margin: 0px;   
+   margin: 0px;
    border: 0px;
 }
 form, input, select, option {
@@ -15,7 +15,7 @@ form, input, select, option {
 }
 
 a img {
-   border: 0px;   
+   border: 0px;
 }
 
 /* colors
@@ -25,8 +25,8 @@ a img {
 
 /* body */
 body {
-   font-family: sans-serif;   
-   background-color: #FFF;   
+   font-family: sans-serif;
+   background-color: #FFF;
 }
 
 /* generel styles */
@@ -44,13 +44,13 @@ body {
 
 h1 {
    color: #234;
-   font-size: 1.7em;   
+   font-size: 1.7em;
    font-weight: normal;
    margin: 20px 0px 10px 0px;
 }
 
 h2 {
-   color: #234;   
+   color: #234;
    font-size: 1.2em;
    font-weight: bold;
    margin: 20px 0px 10px 0px;
@@ -75,7 +75,7 @@ a {
 }
 
 a:hover {
-   text-decoration: underline;   
+   text-decoration: underline;
 }
 
 /*
@@ -90,12 +90,12 @@ table {
 
 table th, table td {
    padding: 3px 10px;
-   vertical-align: top;   
+   vertical-align: top;
    border: 1px solid #fff;
 }
 
 table th {
-   background-color: #88bbcc; 
+   background-color: #88bbcc;
    color: #fff;
 }
 
@@ -113,7 +113,7 @@ table tr:hover {
 
 
 ul {
-   list-style-type: none;   
+   list-style-type: none;
    margin: 5px 0px;
 }
 
@@ -127,31 +127,31 @@ input[type=submit], input[type=button] {
 }
 
 textarea {
-   height: 180px;   
+   height: 180px;
 }
 
 option {
-   width: 180px;  
-   background-color: #fefefe; 
+   width: 180px;
+   background-color: #fefefe;
 }
 
 li {
-   line-height: 1.5;   
+   line-height: 1.5;
 }
 
 /* uploads index */
 table.upindex {
    margin-top: 20px;
    background-color: #efefef;
-   border-collapse: collapse;   
+   border-collapse: collapse;
 }
 
 table.upindex tr.invisible {
-   background-color: #dedede;   
+   background-color: #dedede;
 }
 
 table.upindex th, table.upindex td {
-   text-align: left;   
+   text-align: left;
    padding: 3px;
    border: 1px solid #ccc;
    font-size: 0.8em;
@@ -162,11 +162,11 @@ table.upindex td.delicon {
 }
 
 ul.upload_actions {
-   margin: 50px 0px;   
+   margin: 50px 0px;
 }
 
 ul.account_actions {
-   margin: 10px 0px;   
+   margin: 10px 0px;
 }
 
 
@@ -179,28 +179,28 @@ table.account_create th {
 /* checktags */
 table.checktags {
    margin-top: 20px;
-   border-collapse: collapse;   
-   background-color: #efefef;   
+   border-collapse: collapse;
+   background-color: #efefef;
 }
 
 table.checktags td, table.checktags th {
    padding: 3px 7px;
-   font-size: small;   
+   font-size: small;
 }
 
 table.checktags tr:nth-of-type(odd) {
      background-color:#cdcdcd;
-} 
+}
 
 /* jobindex */
 table.jobindex {
    margin-top: 20px;
    background-color: #e0e0e0;
-   border-collapse: collapse;   
+   border-collapse: collapse;
 }
 
 table.jobindex th, table.jobindex td {
-   text-align: left;   
+   text-align: left;
    padding: 3px;
    border: 1px solid #ccc;
    font-size: 0.8em;
@@ -224,26 +224,31 @@ table.jobindex td.delicon {
 }
 
 span.size {
-   color: #aaa;   
+   color: #aaa;
 }
 
 
 /* jobaction */
 table.jobaction td {
-   vertical-align: bottom;   
+   vertical-align: bottom;
 }
 
 
 /* wizard */
 div.wizard {
-   border: 0px solid #ccc;
-   display: inline-block;
+   float: left;
    margin: 10px 0px;
    padding: 0px;
+   padding-right: 20px;
+}
+
+.wizard label {
+   display: block;
+   font-weight: bold;
 }
 
 p.wizard {
-   margin: 20px 0px;   
+   margin: 20px 0px;
 }
 
 table.wizard {
@@ -251,7 +256,7 @@ table.wizard {
 }
 
 table.wizard th, table.wizard td {
-   padding: 5px;    
+   padding: 5px;
    border: 0px none #fff;
 }
 
@@ -264,7 +269,7 @@ table.wizard th {
 }
 
 table.wizard td.notice {
-   font-style: italic;   
+   font-style: italic;
    font-size: 0.8em;
 }
 
@@ -273,11 +278,11 @@ table.wizard input, table.wizard textarea {
 }
 
 table.wizard textarea {
-   height: 4em;   
+   height: 4em;
 }
 
 table.wizard label {
-   margin-left: 10px;   
+   margin-left: 10px;
 }
 
 table.wizard input.submit,
@@ -292,8 +297,8 @@ input.submit {
 #map {
    float: left;
    border: 1px solid #920900;
-   width: 500px;
-   height: 380px;
+   width: 52%;
+   height: 100%;
 }
 
 /* table latlon */
@@ -310,7 +315,7 @@ table.latlon {
 }
 
 table.latlon th, table.latlon td {
-   padding: 5px;    
+   padding: 5px;
 }
 
 table.latlon th {
@@ -322,7 +327,7 @@ table.latlon th {
 }
 
 table.latlon input {
-   width: 80px;   
+   width: 80px;
 }
 
 
@@ -333,6 +338,7 @@ table.latlon input {
    clear: both;
    margin: 0px 80px 0px 80px;
    padding: 0px;
+   height: 450px;
 }
 
 
@@ -340,7 +346,7 @@ table.latlon input {
 /* header */
 #header {
   background-repeat: repeat-x;
-  padding: 0px 80px; 
+  padding: 0px 80px;
   height: 75px;
   min-width: 600px;
 }
@@ -458,7 +464,7 @@ table.latlon input {
 /* pagination */
 div.pagination {
    margin-top: 30px;
-   font-size: 0.8em;   
+   font-size: 0.8em;
 }
 
 
@@ -515,9 +521,5 @@ div.field_with_errors label.message {
    color: red;
    padding-left: 0px;
    margin-left: 10px;
-   font-size: 0.8em;   
+   font-size: 0.8em;
 }
-
-
-
-

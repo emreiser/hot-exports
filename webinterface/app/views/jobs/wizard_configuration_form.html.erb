@@ -1,8 +1,9 @@
 <% if !@e.nil? %>
    <pre style="margin-top: 20px;"><%= @e.message %></pre>
-<% end %> 
+<% end %>
 
-<h1><%= t 'jobs.newjobconf.h1' %></h1>
+<div class="container">
+  <h1><%= t 'jobs.newjobconf.h1' %></h1>
 
 <div class="wizard">
 <%= form_tag({:action => :wizard_configuration_create}, :multipart => true) do %>
@@ -58,4 +59,3 @@
 <%= submit_tag( t('jobs.button.save'), { :class => "submit" } ) %>
 <% end %>
 </div>
-

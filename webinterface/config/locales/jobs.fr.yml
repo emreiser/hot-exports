@@ -11,10 +11,10 @@ fr:
       filter:              "Filtre"
 
       not_owner:           "Non propriétaire"
-      
+
       based_upon:
          default_tags:     "Seulement les attributs par défaut"
-         directly:         "Directement chargé (ancienne version)" 
+         directly:         "Directement chargé (ancienne version)"
 
       th:
          name:             "Nom"
@@ -29,7 +29,7 @@ fr:
          preset:           "Fichier modèle d'attributs"
          transform:        "Fichier Transformation SQL d'attributs"
          translate:        "Fichier Traduction"
-   
+
          minlon:           "ongitude mini"
          maxlon:           "Longitude maxi"
          minlat:           "Latitude mini"
@@ -50,20 +50,20 @@ fr:
       job:
          h1:               "Tâche"
          restore:          "Restaurer"
-         
+
       runs:
          h2:               "Exécution"
          message:
             jobrunning:    "La procédure est en cours - pas encore de téléchargement disponible"
             nodownload:    "Pas de téléchargement disponible"
-     
-      area:             
+
+      area:
          h2:               "Zone"
 
-      config:           
+      config:
          h2:               "Configuration de la procédure"
 
-      recycle:          
+      recycle:
          h2:               "Nouvelle tâche avec la même configuration"
          text:             "Créer une nouvelle tâche avec une nouvelle zone mais la même configuration."
 
@@ -81,13 +81,13 @@ fr:
             default_tags:  "Ajouter les attributs par défaut ?"
             transform:     "Fichier Transformation SQL d'attributs"
             translation:   "Fichier Traduction"
-#fixme
+
          notice:
             default_tags:  "Default tags are typical data used in rendering an OSM map."
             translation:   "Select a translation file to translate your data into another language."
             transform:     "Select a SQL file to transform your data into another schema."
 
-      newjobwithconfs 
+      newjobwithconfs:
          title:            "Nouvelle tâche (avec la même configuration)"
          h1:               "Nouvelle tâche (avec la même configuration)"
 
@@ -113,5 +113,3 @@ fr:
          area_not_covered:    "La zone sélectionnée n'est pas couverte par le service"
          area_too_large:      "La zone sélectionnée est trop grande"
          bb_only_allowed:     " - Seul %{bbox_max} est autorisé."
-
-
