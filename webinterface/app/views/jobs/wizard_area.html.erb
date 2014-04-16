@@ -4,6 +4,8 @@
 <link type="text/css" rel="stylesheet" href="<%= asset_path 'leaflet-draw-0.2.4/leaflet.draw.css' %>"></script>
 <script type="text/javascript" src="<%= asset_path 'leaflet-draw-0.2.4/leaflet.draw.js' %>"></script>
 
+<script type="text/javascript" src="<%= asset_path 'leaflet-omnivore/leaflet-omnivore.min.js' %>"></script>
+
 <script type="text/javascript">
 $(document).ready(function() {
 
@@ -51,56 +53,17 @@ function init_map(){
    mapnik_layer = L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png');
    map.addLayer(mapnik_layer);
 
-   /*
-   regions_layer = new OpenLayers.Layer.Vector("KML", {
-      projection: map.displayProjection,
-      strategies: [new OpenLayers.Strategy.Fixed()],
-      protocol: new OpenLayers.Protocol.HTTP({
-         url: "/kml/loch.kml",
-         format: new OpenLayers.Format.KML({
-            maxDepth: 2
-         })
-      }),
-      styleMap: new OpenLayers.StyleMap({
-         "default": new OpenLayers.Style({
-            graphicName: "cross",
-            pointRadius: 6,
-            fillOpacity: 0.30,
-            fillColor: "#339966",
-            strokeColor: "#339966",
-            strokeWidth: 2
-         })
-      })
-   });
-   */
 
-   /*
-   check_layer = new OpenLayers.Layer.Vector("KML", {
-      projection: map.displayProjection,
-      strategies: [new OpenLayers.Strategy.Fixed()],
-      protocol: new OpenLayers.Protocol.HTTP({
-         url: "/kml/check.kml",
-         format: new OpenLayers.Format.KML({
-            maxDepth: 2
-         })
-      }),
-      styleMap: new OpenLayers.StyleMap({
-         "default": new OpenLayers.Style({
-            graphicName: "cross",
-            pointRadius: 6,
-            fillOpacity: 0,
-            fillColor: "#efefef",
-            strokeColor: "#339966",
-            strokeWidth: 2
-         })
-      })
+   regions_layer = omnivore.kml('/kml/loch.kml').addTo(map);
+   regions_layer.on('ready', function() {
+     regions_layer.setStyle(function(feature){
+       return { fillOpacity: 0.3, fillColor: "#f00", color: "#f00", weight: 2, clickable: false, pointerEvents: null };
+     });
    });
 
-   map.addLayer(regions_layer);
-   map.addLayer(check_layer);
-
-   */
-
+   // check_layer is not an actual visual layer?
+   // appears to be areas which are ok to downlaod
+   check_layer = omnivore.kml('/kml/check.kml');
 
 <% if @job.id.nil? %>
    map.setView(new L.LatLng(0,0), 1);
@@ -162,6 +125,7 @@ function draw_end(bbox) {
 }
 
 function draw_box(bounds) {
+  vectors.clearLayers();
   vectors.addLayer(bounds);
 }
 
@@ -209,8 +173,10 @@ function values2box() {
    xmaxlon = $("#job_lonmax").val();
    xmaxlat = $("#job_latmax").val();
 
-   //bounds = new OpenLayers.Bounds(xminlon, xminlat, xmaxlon, xmaxlat);
-   //bounds.transform(proj4326,projmerc);
+   bounds = new L.LatLngBounds(
+     new L.LatLng(xminlat, xminlon),
+     new L.LatLng(xmaxlat, xmaxlon)
+   );
    draw_box(bounds);
    $("form").resetClientSideValidations();
 }
