@@ -81,13 +81,13 @@ fr:
             default_tags:  "Ajouter les attributs par défaut ?"
             transform:     "Fichier Transformation SQL d'attributs"
             translation:   "Fichier Traduction"
-
+#fixme
          notice:
             default_tags:  "Default tags are typical data used in rendering an OSM map."
             translation:   "Select a translation file to translate your data into another language."
             transform:     "Select a SQL file to transform your data into another schema."
 
-      newjobwithconfs:
+      newjobwithconfs
          title:            "Nouvelle tâche (avec la même configuration)"
          h1:               "Nouvelle tâche (avec la même configuration)"
 
