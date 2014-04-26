@@ -1,7 +1,7 @@
 <script type="text/javascript" src="<%= asset_path 'OpenLayers-2.11/OpenLayers.js' %>"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-  
+
    // map
    var proj4326;
    var projmerc;
@@ -14,17 +14,17 @@ $(document).ready(function() {
    var vectors;
    var box;
    var transform;
-   
+
    var mapMessage = "";
 
    init_map();
 
-   $(".select_area").click(function(e) { 
+   $(".select_area").click(function(e) {
       e.preventDefault();//dont jump to top of page
       init_drawfeature();
       start_drawfeature();
    });
-   
+
    $(".latlon").change(function() {
       init_drawfeature();
       values2box();
@@ -67,7 +67,7 @@ function init_map(){
    mapnik_layer = new OpenLayers.Layer.XYZ('OSM Mapnik', 'http://tile.openstreetmap.org/${z}/${x}/${y}.png'); /*, {
       sphericalMercator: true
    });*/
-   
+
    map.addLayer(mapnik_layer);
 
    regions_layer = new OpenLayers.Layer.Vector("KML", {
@@ -90,7 +90,7 @@ function init_map(){
          })
       })
    });
-   
+
    check_layer = new OpenLayers.Layer.Vector("KML", {
       projection: map.displayProjection,
       strategies: [new OpenLayers.Strategy.Fixed()],
@@ -114,27 +114,27 @@ function init_map(){
 
    map.addLayer(regions_layer);
    map.addLayer(check_layer);
-  
-   
+
+
 <% if @job.id.nil? %>
    //extent = new OpenLayers.Bounds(-180, -80, 180, 80);
    //extent.transform(proj4326,projmerc);
    //map.zoomToExtent(extent);
-   map.zoomTo(1);
+   map.zoomTo(2);
 <% else %>
 
    extent = new OpenLayers.Bounds(<%= @job.lonmin %>, <%= @job.latmin %>, <%= @job.lonmax %>, <%= @job.latmax %>);
    extent.transform(proj4326,projmerc);
    map.zoomToExtent(extent.scale(2))
 <% end %>
-   
+
 
    updateMapMessage('<%=t('jobs.area.no_area_selected')%>');
 }
 
 function init_drawfeature() {
 
-   if (vectors) { 
+   if (vectors) {
       map.removeLayer(vectors);
       vectors=null;
    }
@@ -144,7 +144,7 @@ function init_drawfeature() {
    });
    map.addLayers([vectors]);
 
-   box = new OpenLayers.Control.DrawFeature(vectors, OpenLayers.Handler.RegularPolygon, { 
+   box = new OpenLayers.Control.DrawFeature(vectors, OpenLayers.Handler.RegularPolygon, {
       handlerOptions: {
          sides: 4,
          snapAngle: 90,
@@ -154,7 +154,7 @@ function init_drawfeature() {
    });
    box.handler.callbacks.done = draw_end;
    map.addControl(box);
-   
+
    transform = new OpenLayers.Control.TransformFeature(vectors, {
       rotate: false,
       irregular: true
@@ -190,7 +190,7 @@ function draw_box(bounds) {
 
 
 function set_bounds(bounds) {
-   
+
    if (!check_bounds(bounds)) {
       return false;
    }
@@ -227,7 +227,7 @@ function init_values2box() {
 
 function values2box() {
 
-   xminlon = $("#job_lonmin").val(); 
+   xminlon = $("#job_lonmin").val();
    xminlat = $("#job_latmin").val();
    xmaxlon = $("#job_lonmax").val();
    xmaxlat = $("#job_latmax").val();
@@ -242,20 +242,20 @@ function check_bounds(bounds) {
 
    var poly = bounds.toGeometry();
    var covered_region = check_layer.features[0].geometry.intersects(poly);
-   
+
    var max_bounds_area = <%= @max_bounds_area.to_s %>;
    var area = bounds.transform(projmerc, proj4326).toGeometry().getArea();
    bounds.transform(proj4326,projmerc);
 
    $("a.select_area").text('<%=t('jobs.area.select_different') %>');
-   
+
    if (!covered_region) {
       //Area is out of the covered regions
       updateMapMessage('<span class="error"><%= t('jobs.errors.area_not_covered') %></span>');
       return false;
    } else if (area > max_bounds_area) {
       //Area is too large
-      updateMapMessage('<span class="error"><%= t('jobs.errors.area_too_large') %>' + parseInt(area) + '<%= t('jobs.errors.bb_only_allowed', :bbox_max => @max_bounds_area.to_s) %></span>'); 
+      updateMapMessage('<span class="error"><%= t('jobs.errors.area_too_large') %>' + parseInt(area) + '<%= t('jobs.errors.bb_only_allowed', :bbox_max => @max_bounds_area.to_s) %></span>');
       return false;
    } else {
       //All ok
@@ -272,7 +272,7 @@ function updateMapMessage(msg) {
 $("form#new_job").submit(function() {
    //Extra validation, in addition to the standard stuff from the
    //validation plugin.
-   if (mapMessage!="" && mapMessage!="&nbsp;") {   		   
+   if (mapMessage!="" && mapMessage!="&nbsp;") {
       alert( mapMessage );
       return false
    } else {
@@ -282,53 +282,40 @@ $("form#new_job").submit(function() {
 
 });
 </script>
-<h1><%= @h1 %></h1>
 
-<div class="wizard">
-   <%= form_for @job, :validate => true,
-                      :url => { :action => @action }  do |f| %>
-                      
-   <%= hidden_field_tag(:old_job_id, @job.id) %>
-   <%= render 'shared/error_messages' %>
-   <table class="wizard">
+<div id="info-panel">
+   <h1><%= @h1 %></h1>
+   <div class="wizard">
+      <%= form_for @job, :validate => true,
+                         :url => { :action => @action }  do |f| %>
 
-<!--
-      <tr>
-         <th><%= f.label :region, t('jobs.th.region') %></th>
-         <th><%= collection_select(:job, :region_id, Region.all, :id, :name, {}, {:class => 'change_project'}) %></th>
-      </tr>
-//-->
-      <tr>
-         <th><%= f.label :name, t('jobs.th.name') %></th>
-         <td><%= f.text_field :name, :style => "width: 320px;" %></td>
-      </tr>
-      <tr>
-         <th><%= f.label :description, t('jobs.th.description') %></th>
-         <td><%= f.text_area :description, :style => "width: 500px;" %></td>
-      </tr>
-      <tr>
-         <th><%= f.label :description, t('jobs.th.area') %></th>
-         <td>
-            <div id="mapmessage">&nsbp;</div>
-            <p id="select_area"><img src="/assets/Pointer.png" style="width:20px;" class="select_area"><a href="#" class="select_area"><%= t 'jobs.action.select_area' %></a></p>
-            <div id="map"></div>
-            
-            <%= f.hidden_field(:lonmin) %>
-            <%= f.hidden_field(:latmin) %>
-            <%= f.hidden_field(:lonmax) %>
-            <%= f.hidden_field(:latmax) %>
-         </td>
-      </tr>
-      <tr>
-      <td colspan="2">
-        <%= f.submit t('jobs.button.createjob'), :class=>'submit' %>
-      </td>
-      </tr>
-   </table>
+         <%= hidden_field_tag(:old_job_id, @job.id) %>
+         <%= render 'shared/error_messages' %>
+         <!--
+               <tr>
+                  <th><%= f.label :region, t('jobs.th.region') %></th>
+                  <th><%= collection_select(:job, :region_id, Region.all, :id, :name, {}, {:class => 'change_project'}) %></th>
+               </tr>
+         //-->
+         <%= f.label :name, t('jobs.th.name') %>
+         <%= f.text_field :name %>
+         <%= f.label :description, t('jobs.th.description') %>
+         <%= f.text_area :description %>
+         <%= f.hidden_field(:lonmin) %>
+         <%= f.hidden_field(:latmin) %>
+         <%= f.hidden_field(:lonmax) %>
+         <%= f.hidden_field(:latmax) %>
 
-
-
-   <div >
+         <%= f.submit t('jobs.button.createjob'), :class=>'submit' %>
+      <% end %>
    </div>
-   <% end %>
+</div>
+
+<div id="map-panel">
+   <div id="mapmessage">&nsbp;</div>
+   <p id="select_area"><img src="/assets/Pointer.png" style="width:20px;" class="select_area"><a href="#" class="select_area"><%= t 'jobs.action.select_area' %></a></p>
+   <div id="map"></div>
+
+
+
 </div>
