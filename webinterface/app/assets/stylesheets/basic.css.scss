@@ -9,9 +9,12 @@ table, thead, tbody, tr, th, td {
    margin: 0px;
    border: 0px;
 }
-form, input, select, option {
-   padding: 5px;
+
+input, textarea, select, option {
+   padding: 5px 10px;
    margin: 10px 0;
+   border: 1px solid #ccc;
+   border-radius: 2px;
 }
 
 a img {
@@ -226,12 +229,6 @@ table.jobaction td {
       margin: 10px 0;
    }
 
-   input[type=text], textarea {
-      padding: 8px;
-      border: 1px solid gray;
-      border-radius: 2px;
-   }
-
    textarea {
       height: 4em;
    }
@@ -418,7 +415,7 @@ table.latlon input {
    }
 
    ul li.username {
-      text-transform: capitalize;
+      text-transform: none;
       font-size: 1.2em;
    }
 
@@ -452,7 +449,7 @@ table.latlon input {
 /* switch language */
 #switch_language {
    float: right;
-   margin: 0px 80px 0px 0px;
+   margin: 10px 80px 0px 0px;
 }
 
 /* footer */
