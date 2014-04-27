@@ -4,17 +4,17 @@
 en:
 
    jobs:
-      title:               "Jobs"
-      h1:                  "All Jobs"
+      title:               "Exports"
+      h1:                  "All Exports"
 
       nojobs:              "No active jobs in database."
       filter:              "Filter"
 
       not_owner:           "not owner"
-      
+
       based_upon:
          default_tags:     "default tags only"
-         directly:         "directly uploaded (old version)" 
+         directly:         "directly uploaded (old version)"
 
       th:
          name:             "Name"
@@ -29,60 +29,60 @@ en:
          preset:           "Tags/Preset File"
          transform:        "Tag Transform SQL File"
          translate:        "Translation File"
-   
+
          minlon:           "Min. Longitude"
          maxlon:           "Max. Longitude"
          minlat:           "Min. Latitude"
          maxlat:           "Max. Latitude"
 
       action:
-         show_deleted:     "Show deleted jobs"
-         hide_deleted:     "Hide deleted jobs"
-         show_notowner:    "Show all jobs including other users' jobs"
-         hide_notowner:    "Hide jobs from other users"
+         show_deleted:     "Show deleted exports"
+         hide_deleted:     "Hide deleted exports"
+         show_notowner:    "Show all exports including other users' exports"
+         hide_notowner:    "Hide exports from other users"
          select_area:      "Select Area"
 
       button:
          newrun:           "Start new run"
-         recyclejob:       "Create Job"
-         createjob:        "Create Job"
+         recyclejob:       "Create Export"
+         createjob:        "Create Export"
          save:             "Save"
 
       job:
-         h1:               "Job"
+         h1:               "Export"
          restore:          "Restore"
 
       runs:
          h2:               "Runs"
          message:
-            jobrunning:    "job is running - no downloads available yet"
+            jobrunning:    "Export is running - no downloads available yet"
             nodownload:    "no download available"
             no_created_by: "anonymous"
-     
-      area:             
+
+      area:
          h2:               "Area"
          drag_to_select:   "Drag to select an area"
          select_different: "Select a different area"
          no_area_selected: "No area selected. Zoom in then click 'Select Area'"
 
-      config:           
-         h2:               "Job Configuration"
+      config:
+         h2:               "Export Configuration"
 
-      recycle:          
-         h2:               "New Job with Similar Configuration"
-         text:             "Create a new job with a new area but the same configuration as this job."
+      recycle:
+         h2:               "New Export with Similar Configuration"
+         text:             "Create a new export with a new area but the same configuration as this export."
 
       newjob:
-         title:            "New Export Job"
-         h1:               "New Export Job"
+         title:            "New Export"
+         h1:               "New Export"
 
       newjobconf:
-         title:            "Job Configuration"
-         h1:               "New Export Job - Configuration"
+         title:            "Export Configuration"
+         h1:               "New Export - Configuration"
          no_file:          "No File"
 
          th:
-            name:          "Job Name"
+            name:          "Export Name"
             preset:        "Select Preset File"
             default_tags:  "Add Default Tags?"
             transform:     "Tag Transform SQL File"
@@ -94,15 +94,15 @@ en:
             transform:     "Select a SQL file to transform your data into another schema."
 
       newjobwithconf:
-         title:            "New Export Job (with fixed Configuration)"
-         h1:               "New Export Job (with fixed Configuration)"
+         title:            "New Export (with fixed Configuration)"
+         h1:               "New Export (with fixed Configuration)"
 
       flash:
          success:
-            job_created:         "Job successfully created!"
+            job_created:         "Export successfully created!"
             run_saved:           "Run successfully started!"
-            restored:            "Job successfully restored!"
-            deleted:             "Job successfully deleted!"
+            restored:            "Export successfully restored!"
+            deleted:             "Export successfully deleted!"
             run_started:         "New run started!"
 
          error:
@@ -111,8 +111,8 @@ en:
             not_saved:           "No job saved!"
             running_job:         "There is already a running job."
             no_run_started:      "No run started!"
-            restored:            "Job not restored!"
-            deleted:             "Job not deleted!"
+            restored:            "Export not restored!"
+            deleted:             "Export not deleted!"
             run_started:         "New run started!"
 
       errors:

@@ -6,7 +6,7 @@ en:
    home:
       title:         "Home"
       h1:            "HOT Exports"
-      about:         
+      about:
          title:      "About"
          text:       "This platform allows you to create custom OpenStreetMap exports for various regions. You can specify an area of interest and a list of features (OpenStreetMap tags) for the export. A current OpenStreetMap data extract for that area in various data formats is then created for you within minutes."
 
@@ -14,14 +14,14 @@ en:
          title:      "How to Get Started"
          text1:      "If you are a new user, create an account. If you already have an account with HOT, log in below."
          text2:      "Click on “Visual Tag Chooser” to upload new tag presets or to view existing tag presets. Note: This will take you to another site so make sure to come back to this page."
-         text3:      "If you would like to use tag preset files already uploaded to HOT Exports, you do not need to click on the “Visual Tag Chooser” link. The create a new job click “New Job”"
-         text4:      "To view an existing job, click on “Jobs” at the top right of your screen. Click on “New Job” to generate a new map."
+         text3:      "If you would like to use tag preset files already uploaded to HOT Exports, you do not need to click on the “Visual Tag Chooser” link. To create a new export click “New Export”"
+         text4:      "To view an existing export, click on “Exports” at the top right of your screen. Click on “New Export” to generate a new map."
 
-      note:          
+      note:
          title:      "Note"
          text:       "This system is a shared resource, please be mindful of the export jobs you create."
 
-      new:           
+      new:
          title:      "What's new?"
          text1:      "Upload of configuration files."
          text2:      "Jobs are deletable."
@@ -31,12 +31,12 @@ en:
    help:
       title:         "Help"
       h1:            "Help"
-      
+
       newjob:
          title:      "Creating a New Job"
          text:       'Click on "New Job" in the top navigation bar to run the new job wizard. Enter the name and a description for the new job, so that you (and others) can easily identify it later. Then choose the region you are interested in (currently must be a box). In the last step you fix the tags. There are two ways. You can choose a JOSM preset file with your tags. And you can select default tags with a checkbox.'
-   
-      rerunjob:      
+
+      rerunjob:
          title:      "Re-running an Existing Job"
          text:       'Choose "Jobs" at the top navigation. Look for the job you want to re-run by its name. A filter helps you to reduce the number of jobs in the list. Then click on your job to get to the detail page again, and click on the "Start new run" button. A new run is started in the background, and again, the download files will be available after a short wait.'
 
@@ -61,7 +61,7 @@ en:
       translation:
          title:         "Help for Translations"
          h1:            "Using Translation Tables"
-         
+
          whatfor:
             title:      "What are Translation Tables for?"
             text1:       "You can use translation tables to translate the content of a database field (but not the name of a field)."
@@ -74,7 +74,7 @@ en:
             text3:      "A translation table may contain empty lines, or lines beginning with a hash sign (#) to denote a comment."
 
          howuse:
-            title:      "How Do I Use a Translation Table?" 
+            title:      "How Do I Use a Translation Table?"
             text1:      'You can create a translation table on your computer using a text editor of your choosing. Then, choose the "New Upload" link in the expert functions in the bottom and request uploading a translation file. At that stage you can give a symbolic name to your translation file, e.g. "General Terms - French" or so.'
             text2:      'When creating a new job, after selecting the area of interest, you can now select one or more translation tables that have been uploaded. These tables will be applied to every run of that job, and will affect all output formats with the exception of raw OSM data.'
 

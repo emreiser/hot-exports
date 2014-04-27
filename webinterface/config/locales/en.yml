@@ -10,14 +10,14 @@ en:
       french:                    "French"
       japanese:                  "Japanese"
       spanish:                   "Spanish"
-   
+
    navigation:
-      home:                      "Home"
+      home:                      "About"
       help:                      "Help"
-      jobs:                      "Jobs"
-      newjob:                    "New Job"
-      newjob_hint:               "Log in or create an account for new jobs!"
-       
+      jobs:                      "Exports"
+      newjob:                    "New Export"
+      newjob_hint:               "Log in or create an account for new exports!"
+
    footer:
       your_account:              "Your Account"
       lost_password:             "Lost password?"
@@ -25,7 +25,7 @@ en:
       visual_tag_chooser:        "Visual Tag Chooser"
       visual_tag_chooser_title:  "Visual application to create preset files."
       user_administration:       "User Administration"
-      logged_in_as:              "You are logged in as"
+      logged_in_as:              "Logged in as"
       text:                      "Copyright © 2013 Humanitarian OpenStreetMap Team · Map data from OpenStreetMap, ODbL 1.0 license"
 
    error:
