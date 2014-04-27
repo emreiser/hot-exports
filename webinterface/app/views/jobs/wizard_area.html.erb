@@ -223,64 +223,61 @@ $("form#new_job").submit(function() {
 });
 </script>
 
-<div class="wizard">
-   <h1><%= @h1 %></h1>
+<div id="info-panel">
+ <h1><%= @h1 %></h1>
+ <div class="wizard">
+    <%= form_for @job, :validate => true,
+                       :url => { action: @action }  do |f| %>
 
-   <%= form_for @job, :validate => true,
-                      :url => { :action => @action }  do |f| %>
+       <%= hidden_field_tag(:old_job_id, @job.id) %>
+       <%= render 'shared/error_messages' %>
 
-   <%= hidden_field_tag(:old_job_id, @job.id) %>
-   <%= render 'shared/error_messages' %>
+       <%= f.label :name, t('jobs.th.name') %>
+       <%= f.text_field :name %>
+       <%= f.label :description, t('jobs.th.description') %>
+       <%= f.text_area :description %>
 
-<!--
-      <tr>
-         <th><%= f.label :region, t('jobs.th.region') %></th>
-         <th><%= collection_select(:job, :region_id, Region.all, :id, :name, {}, {:class => 'change_project'}) %></th>
-      </tr>
-//-->
-    <div>
-      <%= f.label :name, t('jobs.th.name') %>
-      <%= f.text_field :name, :style => "width: 320px;" %>
-    </div>
-    <div>
-      <%= f.label :description, t('jobs.th.description') %>
-      <%= f.text_area :description, :style => "width: 500px;" %>
-    </div>
-    <div>
-      <%= f.label :preset, t('jobs.th.preset') %>
-      <%= select_tag('uploads[presetfile]', options_for_select(@upfiles['preset'], :selected => 0)) %>
-    </div>
-    <div>
-      <%= f.label :preset, t('jobs.th.translate') %>
-      <%= select_tag('uploads[translation]', options_for_select(@upfiles['translation'], :selected => 0)) %>
-    </div>
-    <div>
-      <%= f.label :preset, t('jobs.th.transform') %>
-      <ul>
-      <% @upfiles['tagtransform'].each do |k, v| %>
-         <% if v != 0 %>
-            <li><%= check_box_tag('uploads[tagtransform][]', v) %><%= label_tag(v, k) %></li>
-         <% end %>
-      <% end %>
-      </ul>
-    </div>
-    <div>
-      <div id="mapmessage">&nsbp;</div>
-      <img src="/assets/Pointer.png" style="width:20px;" class="select_area"/>
-      <a href="#" class="select_area">
-        <%= t 'jobs.action.select_area' %>
-      </a>
+       <div class="export-option">
+          <div class="option">
+             <p><%= t 'jobs.newjobconf.th.preset' %></p>
+             <%= select_tag('uploads[presetfile]', options_for_select(@upfiles['preset'], :selected => 0)) %>
+          </div>
+          <div class="hint">(hint)</div>
+       </div>
 
-      <%= f.hidden_field(:lonmin) %>
-      <%= f.hidden_field(:latmin) %>
-      <%= f.hidden_field(:lonmax) %>
-      <%= f.hidden_field(:latmax) %>
+       <div class="export-option">
+          <div class="option">
+             <p><%= t 'jobs.newjobconf.th.default_tags' %></p>
+             <%= check_box_tag('uploads[default_tags]', true, true) %>
+          </div>
+          <div class="hint">(hint)</div>
+       </div>
+
+       <div class="export-option">
+          <div class="option">
+             <p><%= t 'jobs.newjobconf.th.translation' %></p>
+             <%= select_tag('uploads[translation]', options_for_select(@upfiles['translation'], :selected => 0)) %>
+          </div>
+          <div class="hint">(hint)</div>
+       </div>
+
+       <div class="export-option">
+          <p><%= t 'jobs.newjobconf.th.transform' %></p>
+       </div>
+
+       <%= f.hidden_field(:lonmin) %>
+       <%= f.hidden_field(:latmin) %>
+       <%= f.hidden_field(:lonmax) %>
+       <%= f.hidden_field(:latmax) %>
+
+       <%= f.submit t('jobs.button.createjob'), :class=>'submit' %>
+    <% end %>
    </div>
-   <div style="text-align:center;">
-      <%= f.submit t('jobs.button.createjob'), :class=>'submit' %>
-   </div>
-
-   <% end %>
 </div>
 
-<div id="map"></div>
+<div id="map-panel">
+   <div id="mapmessage">&nsbp;</div>
+   <p id="select_area"><img src="/assets/Pointer.png" style="width:20px;" class="select_area"><a href="#" class="select_area"><%= t 'jobs.action.select_area' %></a></p>
+   <div id="map"></div>
+
+</div>

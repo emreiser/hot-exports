@@ -72,7 +72,7 @@ class JobsController < ApplicationController
       @job     = Job.new
       @title   = t('jobs.newjob.title')
       @h1      = t('jobs.newjob.h1')
-      @action  = 'wizard_configuration'
+      @action  = 'wizard_configuration_create'
       @upfiles = uploadfiles_prepare
 
       @max_bounds_area = 100
@@ -177,13 +177,13 @@ class JobsController < ApplicationController
          flash[:error] = t('jobs.flash.error.xml_parsing_failed')
          @upfiles = uploadfiles_prepare
          @title = t('jobs.newjobconf.h1')
-         render 'wizard_configuration_form'
+         render 'wizard_area'
 
       elsif error == 111 then
          flash[:error] = t('jobs.flash.error.no_tags')
          @upfiles = uploadfiles_prepare
          @title = t('jobs.newjobconf.h1')
-         render 'wizard_configuration_form'
+         render 'wizard_area'
 
       else
          @title = t('jobs.newjob.title')
