@@ -10,8 +10,8 @@ table, thead, tbody, tr, th, td {
    border: 0px;
 }
 form, input, select, option {
-   padding: 0px;
-   margin: 0px;
+   padding: 5px;
+   margin: 10px 0;
 }
 
 a img {
@@ -69,7 +69,7 @@ p {
    margin: 5px 0px;
 }
 
-a {
+#switch-language a {
    color: #920902;
    text-decoration: none;
 }
@@ -84,15 +84,25 @@ ul {
 }
 
 /* buttons */
-.btn {
+.btn, button {
    width: auto;
    border-radius: 5px;
    border: 1px solid #357ebd;
    padding: 8px 15px;
    margin-top: 10px;
-   color: white;
    box-shadow: none;
    background: #428bca;
+   font-weight: 300;
+   color: white;
+
+   &:hover {
+      background: #357ebd;
+   }
+
+   a, a:hover, a:visited {
+      color: white;
+      text-decoration: none;
+   }
 }
 
 textarea {
@@ -254,7 +264,7 @@ table.jobaction td {
 #info-panel {
    width: 40%;
    float: left;
-   padding: 0 40px 20px 40px;
+   padding: 0;
    box-sizing: border-box;
 
    h1 {
@@ -321,10 +331,6 @@ table.jobaction td {
    }
 }
 
-.btn {
-
-}
-
 /* table latlon */
 
 #latlon {
@@ -360,7 +366,7 @@ table.latlon input {
 
 #content {
    clear: both;
-   margin: 0px 20px;
+   margin: 0px 80px;
    padding: 0px;
 }
 
@@ -368,66 +374,80 @@ table.latlon input {
 
 /* header */
 #header {
-  background-repeat: repeat-x;
-  padding: 0px 80px;
-  height: 75px;
-  min-width: 600px;
+  padding: 20px 80px;
+  height: 85px;
+  width: 100%;
 }
 
-#header div.nav {
+.shadow {
+   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.4);
+   -moz-box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.4);
+   -webkit-box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.4);
+}
+
+#header .nav {
    float: right;
    text-align: right;
-}
-
-#header div.nav ul {
-   margin-top: 20px;
-   list-style-type: none;
-}
-
-#header div.nav ul li {
-   display:inline;
-   padding-left: 12px;
-   font-size: 1.2em;
-}
-
-#header div.nav ul li a {
-   text-decoration: none;
-   color: #fff;
-}
-
-#header div.nav ul li a:hover {
-   text-decoration: underline;
-}
-
-#header div.nav ul li span.inactive {
-   color: #ccc;
-}
-
-#header div.nav ul li img {
-   width: 40px;
+   vertical-align: top;
    height: 40px;
+
+   ul {
+      list-style-type: none;
+      margin-top: 15px;
+   }
+
+   ul li {
+      vertical-align: baseline;
+      display:inline;
+      padding-left: 30px;
+      font-size: 1.5em;
+      text-transform: uppercase;
+
+      > a {
+         text-decoration: none;
+         color: #234;
+
+            &:hover {
+               color: black;
+            }
+
+            .inactive {
+               color: #ccc;
+            }
+      }
+   }
+
+   ul li.username {
+      text-transform: capitalize;
+      font-size: 1.2em;
+   }
+
 }
 
+#login {
+   text-transform: capitalize;
+   font-size: 90%;
+}
 
-#header div.logo {
+#header .logo {
    width: 350px;
+   height: 40px;
    float: left;
-   padding: 10px 0px 0px 0px;
+
+   img {
+      float: left;
+      height: 40px;
+      width: auto;
+      margin-right: 20px;
+   }
+
+   h1 {
+      margin: 10px 0 0 0;
+      font-weight: normal;
+      text-transform: uppercase;
+   }
 }
 
-#header div.logo img.logo {
-   float: left;
-   vertical-align: middle;
-   margin: 1px;
-   margin-right: 20px;
-}
-
-#header div.logo h1 {
-   margin: 0px;
-   font-family: serif;
-   font-weight: normal;
-   text-shadow: #000 1px 1px 1px; font-size: 28px; color: #fff;
-}
 
 /* switch language */
 #switch_language {

@@ -1,22 +1,23 @@
-<div id="header" style="background-image: url(<%= asset_path 'layout/red-header.png' %>);">
+<div id="header" class="shadow">
    <div class="nav">
       <ul>
          <li><%= link_to t('navigation.home'), root_path %></li>
-         <li><%= link_to t('navigation.help'), help_path %></li>
+<!--          <li><%= link_to t('navigation.help'), help_path %></li> -->
          <li><%= link_to t('navigation.jobs'), jobs_path %></li>
 
          <% if user_signed_in? %>
-         <li><%= link_to t('navigation.newjob'), wizard_area_path %></li>
+         <!-- <li><%= link_to t('navigation.newjob'), wizard_area_path %></li> -->
+         <li class="username"><%= t 'footer.logged_in_as' %>: <%= current_user.email %></li>
          <% else %>
-         <li><span class="inactive" title="<%= t 'navigation.newjob_hint' %>"><%= t 'navigation.newjob' %></span></li>
+         <li><span class="btn" id="login"><%= link_to t('users.login'), new_user_session_path %></span></li>
          <% end %>
 
 
       </ul>
    </div>
    <div class="logo">
-      <img src="<%= asset_path 'layout/hot_logo_white.png' %>" class="logo">
-      <h1>HOT Exports</h1>
+      <img src="<%= asset_path 'layout/hot_logo.png' %>">
+      <h1>OSM Export Tool</h1>
    </div>
 </div>
 
