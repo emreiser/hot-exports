@@ -9,6 +9,13 @@
 <script type="text/javascript">
 $(document).ready(function() {
 
+  //map intro box
+  var closeBox = function(event){
+    $(event.target).parent().hide();
+  };
+
+  $(".close").bind("click", closeBox);
+
    // map
    var map;
    var mapnik_layer;
@@ -270,7 +277,7 @@ $("form#new_job").submit(function() {
        <%= f.hidden_field(:lonmax) %>
        <%= f.hidden_field(:latmax) %>
 
-       <%= f.submit t('jobs.button.createjob'), :class=>'submit' %>
+       <%= f.submit t('jobs.button.createjob'), :class=>'btn submit' %>
     <% end %>
    </div>
 </div>
@@ -278,6 +285,24 @@ $("form#new_job").submit(function() {
 <div id="map-panel">
    <div id="mapmessage">&nsbp;</div>
    <p id="select_area"><img src="/assets/Pointer.png" style="width:20px;" class="select_area"><a href="#" class="select_area"><%= t 'jobs.action.select_area' %></a></p>
-   <div id="map"></div>
+   <div id="map">
+     <div id="intro-box">
+      <span class="glyphicon glyphicon-remove-circle close"></span>
+      <h2><%= t 'home.about.title' %></h2>
+      <p><%= t 'home.about.text' %></p>
+
+      <h2><%= t 'home.get_started.title' %></h2>
+      <ul>
+        <li><%= t 'home.get_started.text1' %></li>
+        <li><%= t 'home.get_started.text2' %></li>
+        <li><%= t 'home.get_started.text3' %></li>
+        <li><%= t 'home.get_started.text4' %></li>
+      </ul>
+
+      <h2><%= t 'home.note.title' %></h2>
+      <p><%= t 'home.note.text' %></p>
+
+     </div>
+   </div>
 
 </div>

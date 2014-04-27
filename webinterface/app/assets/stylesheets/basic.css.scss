@@ -84,12 +84,15 @@ ul {
 }
 
 /* buttons */
-input[type=submit], input[type=button] {
-   margin-top: 20px;
-   padding: 1px 12px;
-   font-size: 12px;
-   color: #950B04;
-   font-weight: normal;
+.btn {
+   width: auto;
+   border-radius: 5px;
+   border: 1px solid #357ebd;
+   padding: 8px 15px;
+   margin-top: 10px;
+   color: white;
+   box-shadow: none;
+   background: #428bca;
 }
 
 textarea {
@@ -207,13 +210,13 @@ table.jobaction td {
    margin: 5px 0;
    }
 
-   input, textarea, label {
+   input[type=text], textarea, label {
       display: block;
       width: 80%;
       margin: 10px 0;
    }
 
-   input, textarea {
+   input[type=text], textarea {
       padding: 8px;
       border: 1px solid gray;
       border-radius: 2px;
@@ -223,16 +226,9 @@ table.jobaction td {
       height: 4em;
    }
 
-   input.submit {
-      width: auto;
-      border-radius: 5px;
-      border: 1px solid #357ebd;
-      padding: 10px 15px;
+   .submit {
+      display: block;
       margin: 0 auto;
-      margin-top: 10px;
-      color: white;
-      box-shadow: none;
-      background: #428bca;
    }
 
    .export-option {
@@ -256,7 +252,7 @@ table.jobaction td {
 }
 
 #info-panel {
-   width: 45%;
+   width: 40%;
    float: left;
    padding: 0 40px 20px 40px;
    box-sizing: border-box;
@@ -267,7 +263,7 @@ table.jobaction td {
 }
 
 #map-panel {
-   width: 55%;
+   width: 60%;
    float: right;
    box-sizing: border-box;
 
@@ -276,7 +272,57 @@ table.jobaction td {
       border: 1px solid #920900;
       width: 100%;
       height: 450px;
+      position: relative;
    }
+
+   #intro-box {
+      position: absolute;
+      top: 20px;
+      right: 0;
+      left: 0;
+      margin: 0 auto;
+      width: 85%;
+      min-height: 200px;
+      border-radius: 5px;
+      border: 1px solid gray;
+      background: white;
+      padding: 10px 30px;
+      z-index: 1000;
+      cursor: default;
+
+      .close {
+         float: right;
+         font-size: 130%;
+         cursor: pointer;
+
+         &:hover {
+            color: gray;
+         }
+      }
+
+      ul {
+         list-style-type: disc;
+         padding-left: 20px;
+         font-size: 1em;
+      }
+
+      ul li {
+         margin: 5px 0;
+      }
+
+      h2 {
+         margin: 15px 0 5px 0;
+      }
+
+      p {
+         font-size: 1em;
+      }
+
+   }
+}
+
+.btn {
+
 }
 
 /* table latlon */
